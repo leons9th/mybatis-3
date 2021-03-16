@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
+ *    Copyright 2009-2021 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
  */
 package org.apache.ibatis.mapping;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.executor.keygen.Jdbc3KeyGenerator;
 import org.apache.ibatis.executor.keygen.KeyGenerator;
@@ -28,7 +24,12 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
+ * 映射的语句，Mapper.xml 中的 SELECT|UPDATE|INSERT|DELETE 等
  * @author Clinton Begin
  */
 public final class MappedStatement {
@@ -39,7 +40,9 @@ public final class MappedStatement {
   private Integer fetchSize;
   private Integer timeout;
   private StatementType statementType;
+  /** 结果集类型 */
   private ResultSetType resultSetType;
+  /** SQL 源码 */
   private SqlSource sqlSource;
   private Cache cache;
   private ParameterMap parameterMap;
@@ -61,6 +64,7 @@ public final class MappedStatement {
     // constructor disabled
   }
 
+  /** 建造者模式构建映射语句对象 */
   public static class Builder {
     private MappedStatement mappedStatement = new MappedStatement();
 

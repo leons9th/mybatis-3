@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2016 the original author or authors.
+ *    Copyright 2009-2021 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -52,6 +52,7 @@ public class PropertyParser {
 
   public static String parse(String string, Properties variables) {
     VariableTokenHandler handler = new VariableTokenHandler(variables);
+    // ${} 类型参数匹配
     GenericTokenParser parser = new GenericTokenParser("${", "}", handler);
     return parser.parse(string);
   }
@@ -82,14 +83,17 @@ public class PropertyParser {
             key = content.substring(0, separatorIndex);
             defaultValue = content.substring(separatorIndex + defaultValueSeparator.length());
           }
+          // 如果有默认值，尝试从 variables 中获取，获取不到则使用默认值替换 ${}
           if (defaultValue != null) {
             return variables.getProperty(key, defaultValue);
           }
         }
+        // 如果在 variables 中找到参数，直接将 ${} 替换为参数
         if (variables.containsKey(key)) {
           return variables.getProperty(key);
         }
       }
+      // 如果找不到参数也没有默认值，返回原来的字符串
       return "${" + content + "}";
     }
   }

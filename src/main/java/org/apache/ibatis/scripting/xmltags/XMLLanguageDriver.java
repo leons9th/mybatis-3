@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2015 the original author or authors.
+ *    Copyright 2009-2021 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -52,11 +52,15 @@ public class XMLLanguageDriver implements LanguageDriver {
       return createSqlSource(configuration, parser.evalNode("/script"), parameterType);
     } else {
       // issue #127
+      // 解析 ${} 属性
       script = PropertyParser.parse(script, configuration.getVariables());
       TextSqlNode textSqlNode = new TextSqlNode(script);
+      // 判断当前语句是否为动态 SQL（）
       if (textSqlNode.isDynamic()) {
+        // 优先进行 ${} 参数解析，再解析 #{} 参数
         return new DynamicSqlSource(configuration, textSqlNode);
       } else {
+        // #{} 类型参数解析
         return new RawSqlSource(configuration, script, parameterType);
       }
     }

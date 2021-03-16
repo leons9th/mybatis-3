@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
+ *    Copyright 2009-2021 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@ import java.sql.Connection;
 
 /**
  * @author Clinton Begin
+ * 事务隔离级别，是一个枚举型
  */
 public enum TransactionIsolationLevel {
+  /** 包含了 JDBC 的五个事物隔离级别 */
   NONE(Connection.TRANSACTION_NONE),
   READ_COMMITTED(Connection.TRANSACTION_READ_COMMITTED),
   READ_UNCOMMITTED(Connection.TRANSACTION_READ_UNCOMMITTED),
@@ -28,6 +30,7 @@ public enum TransactionIsolationLevel {
   SERIALIZABLE(Connection.TRANSACTION_SERIALIZABLE),
   /**
    * A non-standard isolation level for Microsoft SQL Server.
+   * SQL Server 的事物隔离级别
    * Defined in the SQL Server JDBC driver {@link com.microsoft.sqlserver.jdbc.ISQLServerConnection}
    *
    * @since 3.5.6

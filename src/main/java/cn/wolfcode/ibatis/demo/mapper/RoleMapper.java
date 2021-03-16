@@ -13,48 +13,21 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package cn.wolfcode.ibatis.demo.domain;
+package cn.wolfcode.ibatis.demo.mapper;
+
+import cn.wolfcode.ibatis.demo.domain.Role;
 
 /**
  * @author Leon
- * @date 2021/3/6
+ * @date 2021/3/9
  */
-public class Role {
+public interface RoleMapper {
 
-  private Long id;
-  private String sn;
-  private String name;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getSn() {
-    return sn;
-  }
-
-  public void setSn(String sn) {
-    this.sn = sn;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  @Override
-  public String toString() {
-    return "Role{" +
-      "id=" + id +
-      ", sn='" + sn + '\'' +
-      ", name='" + name + '\'' +
-      '}';
-  }
+  /**
+   * 根据id获取角色
+   *
+   * @param id
+   * @return
+   */
+  Role getById(Long id);
 }

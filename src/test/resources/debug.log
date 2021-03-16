@@ -1,0 +1,41 @@
+=======================>>> parseConfiguration(parser.evalNode("/configuration"));
+<configuration>
+    <properties resource="jdbc.properties"/>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="${driverName}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/RoleMapper.xml"/>
+    </mappers>
+</configuration>
+===================================
+
+=====================>>> propertiesElement(root.evalNode("properties"));
+<properties resource="jdbc.properties"/>
+===================================
+
+
+=======================>>> environmentsElement(root.evalNode("environments"));
+<environments default="development">
+    <environment id="development">
+        <transactionManager type="JDBC"/>
+        <dataSource type="UNPOOLED">
+            <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql://localhost:3306/crm"/>
+            <property name="username" value="root"/>
+            <property name="password" value="admin"/>
+        </dataSource>
+    </environment>
+</environments>
+========================
+
+
+1664975373:232766566:cn.wolfcode.ibatis.demo.mapper.RoleMapper.getById:0:2147483647:select  \n    id, name, sn\n    from role\n    where id = ?:2:development
